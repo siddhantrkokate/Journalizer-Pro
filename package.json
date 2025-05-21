@@ -1,0 +1,19 @@
+{
+  "name": "journalizer-pro",
+  "version": "1.0.0",
+  "description": "Project for better trust and to help people to write anything carelessly on computers. Main aim to increase the privacy of use and give 100% for the user and make user feel good while using.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Siddhant Kokate (siddhantrkokate@gmail.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^35.1.2"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "material-icons": "^1.13.14",
+    "material-symbols": "^0.29.2"
+  }
+}

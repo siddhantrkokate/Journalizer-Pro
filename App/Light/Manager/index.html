@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager - Light Mode</title>
+
+    <!-- Basic Dependancies -->
+    
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- script -->
+    <script src="script.js"></script>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../../../Assets/Ubuntu-Font/ubuntu-font.css">
+    <link rel="stylesheet" href="../../../Assets/Poppins-Font/poppins-font.css">
+
+    <!-- icons -->
+    <link rel="stylesheet" href="../../../node_modules/material-symbols/index.css">
+    <link rel="stylesheet" href="../../../node_modules/material-icons/css/material-icons.css">
+
+    <script type="module" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+
+        <!-- logo -->
+        <div class="logo-container">
+            <div class="logo">Journalizer <span style="color: #0045CC;">Pro</span></div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-box" placeholder="Search...">
+            <!-- <button class="search-close-button" onclick="clearSearch()">X</button> -->
+            <select id="search-filter" class="search-by">
+                <option value="title">By Heading</option>
+                <option value="date">By Date</option>
+                <option value="category">By Category</option>
+            </select>
+        </div>
+        
+
+        <!-- window control buttons -->
+        <div class="window-btn-container">
+            <!-- minimize -->
+            <div class="window-btn minimize-btn" title="Minimize" onclick="minimzeApp()"></div>
+            <!-- close -->
+            <div class="window-btn close-btn" title="Close"></div>
+        </div>
+
+    </div>
+
+    <!-- content -->
+    <div class="content">
+
+        <!-- grid -->
+        <div class="grid">
+            <div class="title">Understanding JavaScript Closures</div>
+            <div class="bottom-container">
+                <div class="category">Programming</div>
+                <div class="date">28th March 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">Exploring the Universe: A Space Journey</div>
+            <div class="bottom-container">
+                <div class="category">Science</div>
+                <div class="date">15th April 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">The Power of Habits: How to Change Your Life</div>
+            <div class="bottom-container">
+                <div class="category">Self-Improvement</div>
+                <div class="date">10th March 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">Machine Learning Basics: A Beginner’s Guide</div>
+            <div class="bottom-container">
+                <div class="category">AI & Tech</div>
+                <div class="date">5th May 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">How to Stay Productive While Working from Home</div>
+            <div class="bottom-container">
+                <div class="category">Work & Productivity</div>
+                <div class="date">1st June 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">Top 10 Places to Visit in Japan</div>
+            <div class="bottom-container">
+                <div class="category">Travel</div>
+                <div class="date">22nd July 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">The Future of Electric Vehicles</div>
+            <div class="bottom-container">
+                <div class="category">Technology</div>
+                <div class="date">30th August 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">Why Meditation is Essential for Mental Health</div>
+            <div class="bottom-container">
+                <div class="category">Health & Wellness</div>
+                <div class="date">12th September 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">A Guide to Investing in Cryptocurrency</div>
+            <div class="bottom-container">
+                <div class="category">Finance</div>
+                <div class="date">18th October 2025</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="title">How to Master Data Structures and Algorithms</div>
+            <div class="bottom-container">
+                <div class="category">Programming</div>
+                <div class="date">25th November 2025</div>
+            </div>
+        </div>
+        
+
+    </div>
+
+    <!-- bottom -->
+    <div class="bottom-menu">
+        <div class="material-symbols-outlined bottom-menu-icon more-btn" style="font-size: 20px;">more_vert</div>
+        <div class="add-btn">New Document</div>
+    </div>
+
+    <!-- search result -->
+    <div class="search-result">
+        <div class="search-footer">search-results</div>
+    </div>
+
+    <!--  -->
+    
+</body>
+</html>
+<script>
+
+    document.querySelector('.close-btn').addEventListener('click',function(){
+        closeApp();
+    })
+
+    document.querySelector('.search-box').addEventListener('click', function (event) {
+        let searchResult = document.querySelector('.search-result');
+        searchResult.style.display = 'block'; // Show instantly
+        event.stopPropagation(); // Prevents event bubbling
+    });
+
+    document.addEventListener('click', function () {
+        document.querySelector('.search-result').style.display = 'none'; // Hide when clicking outside
+    });
+
+    document.querySelector('.search-result').addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevent hiding when clicking inside
+    });
+
+    // Smart search functionality
+    document.querySelector('.search-box').addEventListener('input', function () {
+        let query = this.value.toLowerCase().trim();
+        let grids = document.querySelectorAll('.grid');
+        let searchResultContainer = document.querySelector('.search-result');
+        let filterType = document.getElementById('search-filter').value;
+
+        searchResultContainer.innerHTML = ''; // Clear previous results
+
+        if (query === '') {
+            searchResultContainer.style.display = 'none'; // Hide if empty
+            return;
+        }
+
+        let found = false;
+
+        grids.forEach(grid => {
+            let title = grid.querySelector('.title').innerText.toLowerCase();
+            let date = grid.querySelector('.date').innerText.toLowerCase();
+
+            let resultText = "";
+
+            if (filterType === "title") {
+                // Fuzzy search: Check if all words in query exist in title in any order
+                let queryWords = query.split(" ");
+                let allWordsMatch = queryWords.every(word => title.includes(word));
+
+                if (allWordsMatch) {
+                    resultText = grid.querySelector('.title').innerText;
+                }
+            } else if (filterType === "date" && date.includes(query)) {
+                // For date search, show the title of the matching grid
+                resultText = grid.querySelector('.title').innerText;
+            }
+
+            if (resultText) {
+                let resultItem = document.createElement('div');
+                resultItem.classList.add('search-result-item');
+                resultItem.innerText = resultText;
+                searchResultContainer.appendChild(resultItem);
+                found = true;
+            }
+        });
+
+        searchResultContainer.style.display = found ? 'block' : 'none'; // Show only if results exist
+    });
+
+    function clearSearch() {
+        document.getElementById('search-box').value = '';
+        document.querySelector('.search-result').innerHTML = ''; // Clear results
+        document.querySelector('.search-result').style.display = 'none';
+    }
+</script>

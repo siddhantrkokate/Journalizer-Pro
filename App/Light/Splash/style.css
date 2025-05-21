@@ -1,0 +1,66 @@
+*{
+    /* unbuntu font */
+    font-family: 'Ubuntu', sans-serif;
+
+    /* common style */
+    margin: 0; /* margin from all sides 0 to get exact sizes */
+
+}
+
+/* entire screen */
+.screen{
+
+    /* basic */
+    width: 1100px;
+    height: 750px;
+
+    /* to align all items inside to the center of the page */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* logo */
+.logo-container{
+
+    /* to show all items inside in single row */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    /* basic */
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: bold;
+
+    /* animation */
+    opacity: 0;
+    animation: fadeIn 2.5s ease-in-out forwards;
+}
+
+.logo-second-part{
+    /* basic */
+    color: #0057FF;
+}
+
+/* tagline */
+
+.tagline{
+    /* basic */
+    font-size: 15px;
+
+    /* for animation */
+    opacity: 0;
+    animation: fadeIn 3.5s ease-in-out 1.2s forwards;
+}
+
+/* fade in animation */
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
